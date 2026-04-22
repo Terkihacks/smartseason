@@ -11,19 +11,5 @@
       "src": "/(.*)",
       "dest": "src/index.js"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  },
-  "functions": {
-    "src/index.js": {
-      "maxDuration": 10
-    }
-  },
-  "build": {
-    "env": {
-      "DATABASE_URL": "@database_url",
-      "DIRECT_URL": "@direct_url"
-    }
-  }
+  ]
 }
