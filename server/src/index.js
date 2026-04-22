@@ -1,6 +1,21 @@
 require('dotenv').config();
 const createApp = require('./app');
 
+// Generate Prisma client at runtime if not exists
+const { execSync } = require('child_process');
+const fs = require('fs');
+const path = require('path');
+
+const prismaClientPath = path.join(__dirname, '../node_modules/.prisma/client');
+if (!fs.existsSync(prismaClientPath)) {
+  console.log('Generating Prisma client...');
+  try {
+    execSync('npx prisma generate', { stdio: 'inherit' });
+  } catch (error) {
+    console.error('Failed to generate Prisma client:', error);
+  }
+}
+
 const app = createApp();
 
 // Add a test endpoint for Supabase connection
