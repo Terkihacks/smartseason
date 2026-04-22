@@ -1,21 +1,21 @@
 require('dotenv').config();
-const createApp = require('./app');
 
-const app = createApp();
-
-// Add a test endpoint for Supabase connection
-app.get('/api/test-db', async (req, res) => {
-  try {
-    const { PrismaClient } = require('@prisma/client');
-    const prisma = new PrismaClient();
-    await prisma.$connect();
-    await prisma.$disconnect();
-    res.json({ status: 'Database connection successful' });
-  } catch (error) {
-    console.error('Database connection error:', error);
-    res.status(500).json({ error: 'Database connection failed', details: error.message });
-  }
-});
+let app;
+try {
+  const createApp = require('./app');
+  app = createApp();
+} catch (error) {
+  console.error('Failed to create app:', error);
+  // Fallback minimal app
+  const express = require('express');
+  app = express();
+  app.get('/api/health', (req, res) => {
+    res.status(500).json({ 
+      error: 'App initialization failed', 
+      message: error.message 
+    });
+  });
+}
 
 // Export for Vercel serverless functions
 module.exports = app;
