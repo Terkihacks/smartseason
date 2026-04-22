@@ -1,18 +1,5 @@
 /*
  * LandingPage
- * -----------
- * Design decisions:
- * - Whitespace-first: the hero holds a single focused thought; every margin/gap
- *   is deliberate so the eye follows eyebrow → headline → sub → CTA with no friction.
- * - One primary action. The green CTA ("Get started") is the only saturated element
- *   above the fold — anything else drawing attention would dilute it.
- * - Two font weights (400 + 600). Hierarchy comes from size, not from weight
- *   soup. Muted gray (#6b7280) carries secondary copy so the headline stays the loudest voice.
- * - Forest green + mint palette. No gradients, no shadows, no faux-3D. Cards on
- *   a subtly darker surface (#f9fafb) to separate them from the hero without borders.
- * - Inline SVGs only — no image requests, no broken placeholders, no layout shift.
- * - Mobile: hero stays centered, features stack, stat pills wrap. The single-column
- *   reading order is identical to the desktop visual order.
  */
 
 import { useEffect, useRef } from 'react';
