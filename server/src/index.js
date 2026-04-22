@@ -17,6 +17,19 @@ try {
   });
 }
 
+// Add diagnostic endpoint
+app.get('/api/diagnostic', (req, res) => {
+  res.json({
+    status: 'Server is running',
+    nodeEnv: process.env.NODE_ENV,
+    hasDatabaseUrl: !!process.env.DATABASE_URL,
+    hasDirectUrl: !!process.env.DIRECT_URL,
+    hasJwtSecret: !!process.env.JWT_SECRET,
+    hasClientOrigin: !!process.env.CLIENT_ORIGIN,
+    timestamp: new Date().toISOString(),
+  });
+});
+
 // Export for Vercel serverless functions
 module.exports = app;
 
